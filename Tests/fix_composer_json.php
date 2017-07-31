@@ -6,4 +6,4 @@ $composerJson = json_decode(file_get_contents(__DIR__.'/../composer.json'), true
 
 $composerJson['config']['platform']['ext-rdkafka'] = '3.3';
 
-file_put_contents(__DIR__.'/../composer.json', json_encode($composerJson));
+file_put_contents(__DIR__.'/../composer.json', json_encode($composerJson, JSON_PRETTY_PRINT));
