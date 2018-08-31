@@ -19,9 +19,9 @@ class RdKafkaTopic implements PsrTopic, PsrQueue
     private $conf;
 
     /**
-     * @var int
+     * @var array
      */
-    private $partition;
+    private $partitions = [];
 
     /**
      * @var string|null
@@ -69,19 +69,43 @@ class RdKafkaTopic implements PsrTopic, PsrQueue
     }
 
     /**
+     * BC.
+     *
      * @return int
+     *
+     * @deprecated use getPartitions() method instead
      */
     public function getPartition()
     {
-        return $this->partition;
+        return $this->partitions[0] ?? null;
     }
 
     /**
+     * BC.
+     *
      * @param int $partition
+     *
+     * @deprecated use setPartitions() method instead
      */
     public function setPartition($partition)
     {
-        $this->partition = $partition;
+        $this->partitions = [$partition];
+    }
+
+    /**
+     * @return array
+     */
+    public function getPartitions()
+    {
+        return $this->partitions;
+    }
+
+    /**
+     * @param array $partitions
+     */
+    public function setPartitions($partitions)
+    {
+        $this->partitions = $partitions;
     }
 
     /**

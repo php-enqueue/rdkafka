@@ -101,11 +101,7 @@ class RdKafkaConsumer implements PsrConsumer
             if (null === $this->offset) {
                 $this->consumer->subscribe([$this->getQueue()->getQueueName()]);
             } else {
-                $this->consumer->assign([new TopicPartition(
-                    $this->getQueue()->getQueueName(),
-                    $this->getQueue()->getPartition(),
-                    $this->offset
-                )]);
+                $this->consumer->assign($this->createTopicPartitionList());
             }
             $this->subscribed = true;
         }
@@ -164,6 +160,25 @@ class RdKafkaConsumer implements PsrConsumer
         if ($requeue) {
             $this->context->createProducer()->send($this->topic, $message);
         }
+    }
+
+    /**
+     * @return TopicPartition[]
+     */
+    private function createTopicPartitionList()
+    {
+        $topicPartitionList = [];
+
+        $partitions = $this->getQueue()->getPartitions();
+        foreach ($partitions as $partition) {
+            $topicPartitionList[] = new TopicPartition($this->getQueue()->getQueueName(), $partition, $this->offset);
+        }
+
+        if (empty($topicPartitionList)) {
+            $topicPartitionList[] = new TopicPartition($this->getQueue()->getQueueName(), null, $this->offset);
+        }
+
+        return $topicPartitionList;
     }
 
     /**

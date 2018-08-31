@@ -19,6 +19,14 @@ class RdKafkaTopicTest extends TestCase
         $this->assertSame(5, $topic->getPartition());
     }
 
+    public function testCouldSetGetPartitions()
+    {
+        $topic = new RdKafkaTopic('topic');
+        $topic->setPartitions([3, 5, 8]);
+
+        $this->assertSame([3, 5, 8], $topic->getPartitions());
+    }
+
     public function testCouldSetGetKey()
     {
         $topic = new RdKafkaTopic('topic');
