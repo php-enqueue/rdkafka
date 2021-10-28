@@ -23,5 +23,7 @@ jobs:
           coverage: none
 
       - uses: "ramsey/composer-install@v1"
+        with:
+          composer-options: "--ignore-platform-req=ext-rdkafka"
 
       - run: vendor/bin/phpunit --exclude-group=functional
