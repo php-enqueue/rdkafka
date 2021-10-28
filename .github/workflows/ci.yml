@@ -22,8 +22,6 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      - run: php Tests/fix_composer_json.php
-
       - uses: "ramsey/composer-install@v1"
 
       - run: vendor/bin/phpunit --exclude-group=functional
