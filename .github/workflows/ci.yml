@@ -22,8 +22,10 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      - uses: "ramsey/composer-install@v1"
-        with:
-          composer-options: "--ignore-platform-req=ext-rdkafka"
+      - name: Install Composer dependencies
+        run: > # rdkafka unneeded for tests, and a pain to install on CI;
+          composer install
+          --no-progress --prefer-dist --optimize-autoloader
+          --ignore-platform-req=ext-rdkafka
 
       - run: vendor/bin/phpunit --exclude-group=functional
