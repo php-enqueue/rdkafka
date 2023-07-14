@@ -1,13 +1,13 @@
 {
-    "name": "enqueue/rdkafka",
+    "name": "arbor-education/rdkafka",
     "type": "library",
     "description": "Message Queue Kafka Transport",
     "keywords": ["messaging", "queue", "kafka"],
     "homepage": "https://enqueue.forma-pro.com/",
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
-        "ext-rdkafka": "^4.0|^5.0|^6.0",
+        "php": "^7.3|^8.0",
+        "ext-rdkafka": "^6.0",
         "queue-interop/queue-interop": "^0.8.1"
     },
     "require-dev": {
