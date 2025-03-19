@@ -205,6 +205,10 @@ class RdKafkaContext implements Context
                 $this->conf->setDrMsgCb($this->config['dr_msg_cb']);
             }
 
+            if (isset($this->config['log_cb'])) {
+                $this->conf->setLogCb($this->config['log_cb']);
+            }
+
             if (isset($this->config['error_cb'])) {
                 $this->conf->setErrorCb($this->config['error_cb']);
             }
