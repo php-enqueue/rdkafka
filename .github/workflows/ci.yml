@@ -22,7 +22,7 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      - uses: "ramsey/composer-install@v1"
+      - uses: "ramsey/composer-install@v3"
         with: # ext-rdkafka not needed for tests, and a pain to install on CI;
           composer-options: "--ignore-platform-req=ext-rdkafka"
 
